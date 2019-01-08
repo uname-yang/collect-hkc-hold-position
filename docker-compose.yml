@@ -1,0 +1,17 @@
+
+redis:
+  image: redis:latest
+  hostname: redis
+  ports:
+    - "6379:6379"
+
+web:
+  build: web
+  restart: always
+  hostname: web
+  environment:
+    KEYWORDS_LIST: "python,golang,scala,ruby,javascript,sql"
+  links:
+    - redis
+  ports:
+    - "80:5000"
