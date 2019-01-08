@@ -11,7 +11,8 @@ RUN pip3 install redis
 
 # Copy python app
 ADD ./price.py /
-ADD ./hold.py /
+ADD ./hold_sh.py /
+ADD ./hold_sz.py /
 ADD ./echo.sh /
 
 RUN chmod +x /*.py
