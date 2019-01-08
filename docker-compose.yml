@@ -1,3 +1,8 @@
+worker:
+  build: collecter
+  restart: always
+  links:
+    - redis
 
 redis:
   image: redis:latest
@@ -9,8 +14,6 @@ web:
   build: web
   restart: always
   hostname: web
-  environment:
-    KEYWORDS_LIST: "python,golang,scala,ruby,javascript,sql"
   links:
     - redis
   ports:

@@ -1,2 +1,5 @@
 * * * * * root /echo.sh
+* * * * * root /hold_sh.py
+15 * * * * root /hold_sh.py
+45 * * * * root /echo_sz.py
 # pass

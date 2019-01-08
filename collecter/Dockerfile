@@ -3,6 +3,7 @@ FROM ubuntu:latest
 # Install Pip
 RUN apt-get update
 RUN apt-get install -y python3-pip
+RUN apt-get install -y cron
 
 # Install and configure python packages
 RUN pip3 install pyhkconnect
@@ -15,8 +16,6 @@ ADD ./echo.sh /
 
 RUN chmod +x /*.py
 RUN chmod +x /echo.sh
-
-RUN apt-get install cron
 
 # Add crontab file in the cron directory
 ADD cronfile /etc/cron.d/simple-cron
