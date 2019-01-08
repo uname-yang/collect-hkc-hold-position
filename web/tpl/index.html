@@ -1,0 +1,29 @@
+{% extends "main.html" %} {% block body %}
+<div class="row">
+	{% for lang in langs %}
+	<div class="span4">
+		<h2>{{ lang["name"] }}</h2>
+		<p><a class="btn" href="#">{{ lang["count"] }}</a></p>
+	</div>
+	{% end %}
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>user</th>
+			<th>tweets</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for tw in tweets %}
+		<tr>
+			<td><img src={{ tw[ "user"] }} class="img-circle"></td>
+			<td>{{ tw["tw"] }}</td>
+		</tr>
+		{% end %}
+	</tbody>
+</table>
+
+
+{% end %}

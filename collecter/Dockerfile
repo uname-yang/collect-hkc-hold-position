@@ -8,6 +8,7 @@ RUN apt-get install -y cron
 # Install and configure python packages
 RUN pip3 install pyhkconnect
 RUN pip3 install redis
+RUN pip3 install pysnowball
 
 # Copy python app
 ADD ./price.py /

@@ -20,6 +20,7 @@ def main():
     json_str = sh.to_json(orient='values')
     json_obj = json.loads(json_str)
 
+    codes = []
     for record in json_obj:
         code = record[0]
         name = record[1]
@@ -29,8 +30,10 @@ def main():
 
         db.set('HOLD:'+code, held)
         db.set('NAME:'+code, name)
-
-    # sz = hkc.northbound_shareholding_sz()
+        codes.append(code)
+    
+    codes_str = "|".join(codes)
+    db.set('CODES:SH', codes_str)
 
     logging.info("End Point.")
 
