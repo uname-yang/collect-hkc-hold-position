@@ -16,7 +16,7 @@ def main():
     codes_sh = db.get('CODES:SH')
 
     if codes_sz == None or codes_sh == None:
-        return 
+        return
     codes_sz = codes_sz.decode("utf-8")
     codes_sh = codes_sh.decode("utf-8")
 
@@ -26,11 +26,22 @@ def main():
 
     for code in codes:
         acode = tran_code(code)
+        name = db.get('NAME:'+code).decode("utf-8")
         hold = int(db.get('HOLD:'+code).decode("utf-8"))
 
         price = quote(acode)
         capital = int(price * hold)
-        db.hset("PRICE", code, price)
+
+        obj = {
+            'acode': acode,
+            'code': code,
+            'name': name,
+            'hold': hold,
+            'price': price,
+            'capital': capital,
+        }
+
+        db.hset("FULLVIEW", code, json.dumps(obj))
 
     logging.info("End Point.")
 

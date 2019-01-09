@@ -1,6 +1,7 @@
 * * * * * root /echo.sh
 #* * * * * root /hold_sh.py
 */15 * * * * root /hold_sh.py
-*/15 * * * * root /echo_sz.py
+*/15 * * * * root /hold_sz.py
+* * * * * root /view.py
 * * * * * root /price.py
 # pass

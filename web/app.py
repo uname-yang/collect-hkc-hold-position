@@ -13,43 +13,33 @@ define("port", default=5000, help="run on the given port", type=int)
 
 db = redis.Redis(host='redis', port=6379, db=0)
 
-# KEYWORDS_LIST = os.environ.get('KEYWORDS_LIST', '').split(',')
-
-
 class Index(tornado.web.RequestHandler):
     def get(self):
-        langs = []
-        tweets = []
-        # for key in KEYWORDS_LIST:
-        #     langs.append({
-        #         "name": key,
-        #         "count": db.get(key)
-        #     })
-        #     tweets.append({
-        #         "user": db.get('tw:'+key+':img'),
-        #         "tw": db.get('tw:'+key)
-        #     })
-        self.render('index.html',
-                    langs=langs,
-                    tweets=tweets)
+        data = []
+        data_dict = db.hgetall('FULLVIEW')
+
+        for key in data_dict.keys():
+            data.append(json.loads(data_dict[key].decode("utf-8")))
+        data = sorted(data, key=lambda d: d['capital'], reverse=True)
+        self.render('index.html',hold=data)
 
 
-class Status(tornado.web.RequestHandler):
-    def get(self, tag):
-        count = db.get(tag)
-        self.write(json.dumps(count))
+class Full(tornado.web.RequestHandler):
+    def get(self):
+        data = []
+        data_dict = db.hgetall('FULLVIEW')
 
+        for key in data_dict.keys():
+            data.append(json.loads(data_dict[key].decode("utf-8")))
 
-class Tweets(tornado.web.RequestHandler):
-    def post(self):
-        lang = self.get_argument('lang', 'python')
-        self.write(json.dumps(db.get('tw:'+lang)))
+        data = sorted(data, key=lambda d: d['capital'], reverse=True)
+        self.write(json.dumps(data))
 
 
 if __name__ == '__main__':
 	tornado.options.parse_command_line()
 	app = tornado.web.Application(
-		handlers=[(r'/', Index), (r'/tweets', Tweets), (r'/status/(.*)', Status)],
+		handlers=[(r'/', Index), (r'/full', Full)],
 		template_path=os.path.join(os.path.dirname(__file__), "tpl"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
 	)
