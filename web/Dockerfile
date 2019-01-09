@@ -6,6 +6,6 @@ RUN pip install -r /requirements.txt
 ADD . /code
 WORKDIR /code
 
-CMD python app.py
+CMD python3 app.py
 
 EXPOSE 5000

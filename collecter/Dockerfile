@@ -12,6 +12,7 @@ RUN pip3 install pysnowball
 
 # Copy python app
 ADD ./price.py /
+ADD ./view.py /
 ADD ./hold_sh.py /
 ADD ./hold_sz.py /
 ADD ./echo.sh /

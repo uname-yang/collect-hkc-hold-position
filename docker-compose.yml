@@ -7,8 +7,8 @@ collect:
 redis:
   image: redis:latest
   hostname: redis
-  ports:
-    - "6379:6379"
+  # ports:
+  #   - "6379:6379"
 
 web:
   build: web
