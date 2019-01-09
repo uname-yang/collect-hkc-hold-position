@@ -17,6 +17,8 @@
 
 ## WEB截图
 
+Demo 地址：[http://hkcrank.crackcreed.com/](http://hkcrank.crackcreed.com/)
+
 ![cut](meta/rank.PNG)
 
 ## 安装
